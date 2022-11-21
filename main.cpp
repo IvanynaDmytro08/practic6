@@ -59,11 +59,11 @@ public:
     bool find(char &ele){
 
         for (int i = 0; i < size; i++) {
-                if (ele == array[i])
-                    return ele;
-            }
-        return false;
+            if (ele == array[i])
+                return ele;
         }
+        return false;
+    }
 
     SomeString& operator += (SomeString& str) {
 
@@ -73,7 +73,7 @@ public:
             ptr = new char[size + str.size];
 
             for (int i = 0; i < size; i++) {
-            ptr[i] = array[i];
+                ptr[i] = array[i];
             }
 
             for (int i = size, j = 0; i < (size + str.size); i++) {
@@ -126,7 +126,7 @@ private:
 
 
 
-    std::ostream& operator << (std::ostream &out, const SomeString &str){
+std::ostream& operator << (std::ostream &out, const SomeString &str){
     for (int i = 0; i < str.size; i++) {
         out << str.array[i];
     }
@@ -157,7 +157,7 @@ int main() {
         std::cout << " STR3 " << str3 << "  SIZE IS " << str3.getSize() << std::endl;
 
 
-   char m_find;
+    char m_find;
 
     std::cout <<  "Input element which you want looking for - ";
     std::cin >> m_find;
@@ -193,4 +193,3 @@ int main() {
 
     return 0;
 }
-
