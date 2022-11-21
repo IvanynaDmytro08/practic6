@@ -112,6 +112,7 @@ public:
             return false;
         }
         return true;
+
     }
 
     friend std::ostream& operator << (std::ostream &out, const SomeString &o);
