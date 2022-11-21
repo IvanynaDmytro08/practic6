@@ -1,0 +1,3 @@
+/Users/dimaivanina/CLionProjects/H/traning_with_pr6/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/dimaivanina/CLionProjects/H/traning_with_pr6/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/dimaivanina/CLionProjects/H/traning_with_pr6/cmake-build-debug/CMakeFiles/traning_with_pr6.dir
