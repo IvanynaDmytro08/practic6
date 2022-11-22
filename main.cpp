@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 class SomeString {
 
@@ -60,7 +61,7 @@ public:
 
         for (int i = 0; i < size; i++) {
             if (ele == array[i])
-                return ele;
+                return true;
         }
         return false;
     }
@@ -91,40 +92,33 @@ public:
     }
 
     char operator[](int index) {
+
+        assert(index < size && index >= 0);
         return array[index];
     }
 
-    bool operator == (SomeString& str) {
-
-        char *ptr;
-
-        if (size > 0 ){
-
-            ptr = new char[size + str.size];
-
-            for (int i = 0; i < size; i++) {
-                ptr[i] = array[i];
-            }
-
-            for (int i = 0; i < (size + sizeof(str)); i++) {
-                if (ptr[i] != str.array[i]);
-            }
-            return false;
-        }
-        return true;
-
-    }
-
     friend std::ostream& operator << (std::ostream &out, const SomeString &o);
+    friend bool operator == (SomeString& str, SomeString& str2);
 
 private:
 
     char* array;
     int size;
 
-
 };
 
+bool operator == (SomeString& str, SomeString& str2) {
+
+    if (str.size != str2.size )
+        return false;
+
+        for (int i = 0; i < str.size; i++) {
+
+            if(str.array[i] != str2.array[i])
+                 return false;
+        }
+    return true;
+}
 
 
 std::ostream& operator << (std::ostream &out, const SomeString &str){
@@ -143,7 +137,6 @@ int main() {
 
     int size = str3.getSize();
     std::cout << size << std::endl;
-
 
 
     if (str.getSize() > 0)
@@ -166,23 +159,16 @@ int main() {
     bool findRezult = str.find(m_find);
 
     if (findRezult) {
-        std::cout << "Char " << m_find << " is find in your array " << std::endl;
+        std::cout << "Char " << findRezult << " is find in your array " << std::endl;
     }
     else {
-        std::cout << "Char " << m_find << " is not find in your array " << std::endl;
+        std::cout << "Char " << findRezult << " is not find in your array " << std::endl;
     }
 
 
     std::cout << "After joining 2 array - " << std::endl;
     str += str2;
     std::cout << str << std::endl;
-
-    int index;
-
-    std::cout << "Input index element which you want return " << std::endl;
-    std::cin >> index;
-
-    std::cout << "Your return element - " << str[index] << std::endl;
 
     if (str == str2) {
         std::cout << "Arrays is equal " << std::endl;
@@ -191,6 +177,12 @@ int main() {
         std::cout << "Arrays is not equal " << std::endl;
     }
 
+    int index;
+
+    std::cout << "Input index element which you want return " << std::endl;
+    std::cin >> index;
+
+    std::cout << "Your return element - " << str[index] << std::endl;
 
     return 0;
 }
