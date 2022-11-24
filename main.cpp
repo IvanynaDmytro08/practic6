@@ -159,10 +159,10 @@ int main() {
     bool findRezult = str.find(m_find);
 
     if (findRezult) {
-        std::cout << "Char " << findRezult << " is find in your array " << std::endl;
+        std::cout << "Char " << m_find << " is find in your array " << std::endl;
     }
     else {
-        std::cout << "Char " << findRezult << " is not find in your array " << std::endl;
+        std::cout << "Char " << m_find << " is not find in your array " << std::endl;
     }
 
 
