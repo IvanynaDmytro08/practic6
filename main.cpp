@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 class SomeString {
 
@@ -59,11 +60,11 @@ public:
     bool find(char &ele){
 
         for (int i = 0; i < size; i++) {
-                if (ele == array[i])
-                    return ele;
-            }
-        return false;
+            if (ele == array[i])
+                return true;
         }
+        return false;
+    }
 
     SomeString& operator += (SomeString& str) {
 
@@ -73,7 +74,7 @@ public:
             ptr = new char[size + str.size];
 
             for (int i = 0; i < size; i++) {
-            ptr[i] = array[i];
+                ptr[i] = array[i];
             }
 
             for (int i = size, j = 0; i < (size + str.size); i++) {
@@ -91,42 +92,36 @@ public:
     }
 
     char operator[](int index) {
+
+        assert(index < size && index >= 0);
         return array[index];
     }
 
-    bool operator == (SomeString& str) {
-
-        char *ptr;
-
-        if (size > 0 ){
-
-            ptr = new char[size + str.size];
-
-            for (int i = 0; i < size; i++) {
-                ptr[i] = array[i];
-            }
-
-            for (int i = 0; i < (size + sizeof(str)); i++) {
-                if (ptr[i] != str.array[i]);
-            }
-            return false;
-        }
-        return true;
-    }
-
     friend std::ostream& operator << (std::ostream &out, const SomeString &o);
+    friend bool operator == (SomeString& str, SomeString& str2);
 
 private:
 
     char* array;
     int size;
 
-
 };
 
+bool operator == (SomeString& str, SomeString& str2) {
+
+    if (str.size != str2.size )
+        return false;
+
+        for (int i = 0; i < str.size; i++) {
+
+            if(str.array[i] != str2.array[i])
+                 return false;
+        }
+    return true;
+}
 
 
-    std::ostream& operator << (std::ostream &out, const SomeString &str){
+std::ostream& operator << (std::ostream &out, const SomeString &str){
     for (int i = 0; i < str.size; i++) {
         out << str.array[i];
     }
@@ -144,7 +139,6 @@ int main() {
     std::cout << size << std::endl;
 
 
-
     if (str.getSize() > 0)
         std::cout << " STR " << str << "  SIZE IS " << str.getSize() << std::endl;
     if (str2.getSize() > 0)
@@ -157,7 +151,7 @@ int main() {
         std::cout << " STR3 " << str3 << "  SIZE IS " << str3.getSize() << std::endl;
 
 
-   char m_find;
+    char m_find;
 
     std::cout <<  "Input element which you want looking for - ";
     std::cin >> m_find;
@@ -176,13 +170,6 @@ int main() {
     str += str2;
     std::cout << str << std::endl;
 
-    int index;
-
-    std::cout << "Input index element which you want return " << std::endl;
-    std::cin >> index;
-
-    std::cout << "Your return element - " << str[index] << std::endl;
-
     if (str == str2) {
         std::cout << "Arrays is equal " << std::endl;
     }
@@ -190,7 +177,12 @@ int main() {
         std::cout << "Arrays is not equal " << std::endl;
     }
 
+    int index;
+
+    std::cout << "Input index element which you want return " << std::endl;
+    std::cin >> index;
+
+    std::cout << "Your return element - " << str[index] << std::endl;
 
     return 0;
 }
-
